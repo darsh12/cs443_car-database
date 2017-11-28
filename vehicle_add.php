@@ -69,7 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-function clean($data) {
+function clean($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -116,11 +117,11 @@ function clean($data) {
                     <label class="active" for="location" data-success="Stupendous!">Location *</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input type="datetime-local" name="arrDate" placeholder="MM/DD/YYYY --:-- --" value="<?php echo $arrDate ?>">
+                    <input type="datetime-local" name="arrDate" placeholder="YYYY-MM-DD HH:MM:SS" value="<?php echo $arrDate ?>">
                     <label class="active" for="arrDate" data-success="Eggstatic!">Arrival Date *</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input type="datetime-local" name="depDate" placeholder="MM/DD/YYYY --:-- --" value="<?php echo $depDate ?>">
+                    <input type="datetime-local" name="depDate" placeholder="YYYY-MM-DD HH:MM:SS" value="<?php echo $depDate ?>">
                     <label class="active" for="depDate" data-success="Stellar!">Depature Date *</label>
                 </div>
                 <div class="col s12 radioSection">
@@ -128,15 +129,21 @@ function clean($data) {
                         <h6>Choose vehicle type</h6>
                     </div>
                     <div class="row">
-                        <input type="radio" class="with-gap" name="vicType" id="service" value="Service" <?php if ($_POST["vicType"] == "Service") echo "checked"; ?>/>
+                        <input type="radio" class="with-gap" name="vicType" id="service" value="Service" <?php if ($_POST["vicType"] == "Service") {
+    echo "checked";
+} ?>/>
                         <label for="service">Service</label>
                     </div>
                     <div class="row">
-                        <input type="radio" class="with-gap" name="vicType" id="new" value="New" <?php if ($_POST["vicType"] == "New") echo "checked"; ?>/>
+                        <input type="radio" class="with-gap" name="vicType" id="new" value="New" <?php if ($_POST["vicType"] == "New") {
+    echo "checked";
+} ?>/>
                         <label for="new">New</label>
                     </div>
                     <div class="row">
-                        <input type="radio" class="with-gap" name="vicType" id="used" value="Used" <?php if ($_POST["vicType"] == "Used") echo "checked"; ?>/>
+                        <input type="radio" class="with-gap" name="vicType" id="used" value="Used" <?php if ($_POST["vicType"] == "Used") {
+    echo "checked";
+} ?>/>
                         <label for="used">Used</label>
                     </div>
                     <div class="row">
@@ -159,25 +166,25 @@ function clean($data) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // obtain connection to database
                 require_once("connection.php");
-                
+
                 // insert vehicle into database
                 if (isset($_REQUEST["action"])) {
                     // insert data into vehicle_model table
-                    $sql = "INSERT INTO vehicle_model (vin, make, model, year) VALUES 
+                    $sql = "INSERT INTO vehicle_model (vin, make, model, year) VALUES
                     ('$vin', '$make', '$model', '$year');";
-                
-                    if ($conn->query($sql) === TRUE) {
+
+                    if ($conn->query($sql) === true) {
                         echo "Vehicle " . $vin . " " . $make . " " . $model . " has been added to the vehicle_model table successfully" . "<br>";
                     } else {
                         echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
                         die;
                     }
-                    
+
                     // insert vehicle data into inventory
                     $sql = "INSERT INTO inventory (vin, location, arrival_date, departure_date, vehicle_type) VALUES
                     ('$vin', '$location', '$arrDate', '$depDate', '$vicType');";
-                
-                    if ($conn->query($sql) === TRUE) {
+
+                    if ($conn->query($sql) === true) {
                         echo "Vehicle " . $vin . " " . $make . " " . $model . " has been added to the inventory table successfully" . "<br>";
                         $message = "Vehicle has been added successfully!";
                         echo "<script type='text/javascript'>alert('$message');</script>";

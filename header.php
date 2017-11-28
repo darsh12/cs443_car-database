@@ -10,10 +10,10 @@
     <link rel="shortcut icon" href="http://sstatic.net/so/favicon.ico">
     <!--Favicon browser tab icon-->
     <link rel="icon" href="autocatz.ico">
-    
+
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
+
     <title><?php echo $title;?></title>
 
     <style>
@@ -41,12 +41,15 @@
                 <li><a href="vehicle_add.php"><i class="material-icons left">directions_car</i>Vehicle</a></li>
                 <li><a href="customer_add.php"><i class="material-icons left">tag_faces</i>Customer</a></li>
                 <li><a href="employee_add.php"><i class="material-icons left">work</i>Employee</a></li>
+                <li><a href="vehicle_sell.php"><i class="material-icons left">money</i>Sell</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="service.php"><i class="material-icons left">build</i>Service</a></li>
                 <li><a href="vehicle_add.php"><i class="material-icons left">directions_car</i>Vehicle</a></li>
                 <li><a href="customer_add.php"><i class="material-icons left">tag_faces</i>Customer</a></li>
                 <li><a href="employee_add.php"><i class="material-icons left">work</i>Employee</a></li>
+                <li><a href="vehicle_sell.php"><i class="material-icons left">money</i>Sell</a></li>
+
             </ul>
         </div>
     </nav>
