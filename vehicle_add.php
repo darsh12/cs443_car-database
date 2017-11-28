@@ -241,7 +241,7 @@ function clean($data)
                     required: true
                 },
                 depDate: {
-                    required: true
+                    required: false
                 },
                 vicType: {
                     required: true

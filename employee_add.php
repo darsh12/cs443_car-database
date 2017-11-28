@@ -78,7 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-function clean($data) {
+function clean($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -135,15 +136,21 @@ function clean($data) {
                         <h6>Choose current position</h6>
                     </div>
                     <div class="row">
-                        <input type="radio" class="with-gap" name="empType" id="service" value="Service" <?php if ($_POST["empType"] == "Service") echo "checked"; ?>/>
+                        <input type="radio" class="with-gap" name="empType" id="service" value="Service" <?php if ($_POST["empType"] == "Service") {
+    echo "checked";
+} ?>/>
                         <label for="service">Service</label>
                     </div>
                     <div class="row">
-                        <input type="radio" class="with-gap" name="empType" id="sales" value="Sales" <?php if ($_POST["empType"] == "Sales") echo "checked"; ?>/>
+                        <input type="radio" class="with-gap" name="empType" id="sales" value="Sales" <?php if ($_POST["empType"] == "Sales") {
+    echo "checked";
+} ?>/>
                         <label for="sales">Sales</label>
                     </div>
                     <div class="row">
-                        <input type="radio" class="with-gap" name="empType" id="admin" value="Administration" <?php if ($_POST["empType"] == "Administration") echo "checked"; ?>/>
+                        <input type="radio" class="with-gap" name="empType" id="admin" value="Administration" <?php if ($_POST["empType"] == "Administration") {
+    echo "checked";
+} ?>/>
                         <label for="admin">Administration</label>
                     </div>
                     <div class="row">
@@ -166,27 +173,28 @@ function clean($data) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // obtain connection to database
                 require_once("connection.php");
-                
+
                 // insert employee into database
                 if (isset($_REQUEST["action"])) {
                     // insert data into employee table
-                    $sql = "INSERT INTO employee (firstname, lastname, email, birthdate, street, city, state, zip, phone) VALUES 
+                    $sql = "INSERT INTO employee (firstname, lastname, email, birthdate, street, city, state, zip, phone) VALUES
                     ('$firstName', '$lastName', '$email', '$birthDate', '$streetAddr', '$cityAddr', '$stateAddr', '$zipAddr', '$phone');";
-                
-                    if ($conn->query($sql) === TRUE) {
-                        echo "Employee " . $firstName . " " . $lastName . " has been added to the employee table successfully" . "<br>";
+
+                    if ($conn->query($sql) === true) {
+                        $last_id=mysqli_insert_id($conn);
+                        echo "Employee ". $last_id." ". $firstName . " " . $lastName . " has been added to the employee table successfully" . "<br>";
                     } else {
                         echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
                         die;
                     }
-                    
+
                     // insert data into employee_type data
                     $sql = "INSERT INTO employee_type (employee_id, type) VALUES
                     ((SELECT id FROM employee WHERE firstname = '$firstName' AND lastname = '$lastName' AND email = '$email'), '$empType');";
-                
-                    if ($conn->query($sql) === TRUE) {
+
+                    if ($conn->query($sql) === true) {
                         echo "Employee type of " . $firstName . " " . $lastName . " has been added to the employee_type table successfully" . "<br>";
-                        $message = "Employee has been added successfully!";
+                        $message = "Employee has been added successfully! ID:" .$last_id;
                         echo "<script type='text/javascript'>alert('$message');</script>";
                         // must use script to not interfere with earlier php header call
                         echo("<script>location.href = '" . $_SERVER["PHP_SELF"] . "';</script>");
